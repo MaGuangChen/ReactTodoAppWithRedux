@@ -1,5 +1,7 @@
-let React = require('react');
-let TodoList = require('TodoList');
+import React from 'react';
+
+import TodoList from 'TodoList';
+import AddTodo from 'AddTodo';
 
 /*
 性質：stateful component
@@ -26,6 +28,11 @@ let TodoApp = React.createClass({
       ]
     };
   },
+
+  handleAddTodo: function(text){
+     alert(`新增待辦事項 ${text}`);
+  },
+
   render: function () {
     let {todos} = this.state;
 
@@ -33,6 +40,7 @@ let TodoApp = React.createClass({
       <div>
         <h1>代辦事項</h1>
         <TodoList todos={todos}/>
+        <AddTodo onAddTodo={this.handleAddTodo}/>
       </div>
     )
   }
