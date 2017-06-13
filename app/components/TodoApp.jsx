@@ -1,7 +1,12 @@
-var React = require('react');
-var TodoList = require('TodoList');
+let React = require('react');
+let TodoList = require('TodoList');
 
-var TodoApp = React.createClass({
+/*
+性質：stateful component
+負責工作：將state傳遞給子component，並藉由他們更新之
+接收props：無
+*/
+let TodoApp = React.createClass({
   getInitialState: function () {
     return {
       todos: [
@@ -22,10 +27,11 @@ var TodoApp = React.createClass({
     };
   },
   render: function () {
-    var {todos} = this.state;
+    let {todos} = this.state;
 
     return (
       <div>
+        <h1>代辦事項</h1>
         <TodoList todos={todos}/>
       </div>
     )
