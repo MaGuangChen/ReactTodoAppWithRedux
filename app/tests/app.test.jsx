@@ -1,7 +1,7 @@
 var expect = require('expect');
 
 describe('App', () => {
-  it('should properly run tests', () => {
+  it('paul test 是否正確執行測試', () => {
     expect(1).toBe(1);
   });
 });
