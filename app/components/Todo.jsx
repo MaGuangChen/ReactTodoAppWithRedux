@@ -8,11 +8,14 @@ var React = require('react');
 */
 let Todo = React.createClass({
   render: function () {
-    let {id, text} = this.props; 
+    let {id, text,completed} = this.props; 
     //傳進來的object中的property
     return (
-      <div>
-           待辦事項id：{id}----{text}
+      <div onClick={()=>{
+         this.props.onToggle(id);
+      }}>
+           <input type="checkbox" checked={completed}/>
+           {text}
       </div>
     )
   }

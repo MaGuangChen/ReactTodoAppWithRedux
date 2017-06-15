@@ -18,7 +18,7 @@ let TodoList = React.createClass({
       return todos.map((todo) => {
         //這邊有用到剩餘參數{...todo}，代表著object內的所有剩餘的東西
         return (
-          <Todo key={todo.id} {...todo}/>
+          <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>
         );
       });
     };

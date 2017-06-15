@@ -15,16 +15,20 @@ let TodoApp = React.createClass({
       todos: [
         {
           id: uuid(),//id如果要是獨特獨有的，我們要用node的套件node-uuid
-          text: 'Walk the dog'
+          text: 'Walk the dog',
+          completed: false
         }, {
           id: uuid(),
-          text: 'Clean the yard'
+          text: 'Clean the yard',
+          completed: true
         }, {
           id: uuid(),
-          text: 'Leave mail on porch'
+          text: 'Leave mail on porch',
+          completed: true
         }, {
           id: uuid(),
-          text: 'Play video games'
+          text: 'Play video games',
+          completed: false
         }
       ],
       showCompleted: false,
@@ -39,7 +43,8 @@ let TodoApp = React.createClass({
         ...this.state.todos,//將目前的state引入進來
         {
           id:uuid(),//id如果要是獨特獨有的，我們要用node的套件node-uuid
-          text:text//這邊接AddTodo component傳來的user輸入就好
+          text:text,//這邊接AddTodo component傳來的user輸入就好
+          completed:false//預設當然為false因為才剛增加應該還沒做吧
         }
       ]
     });
@@ -52,7 +57,21 @@ let TodoApp = React.createClass({
       searchText:searchText.toLowerCase()
     })
   },
+  //切換顯示的待辦事項，已完成或未完成
+  //經過Todo component -> TodoList component -> TodoApp component
+  handleToggle: function(id){
+   //找出state.todos.id等於傳進來的id，如果等於那就切換狀態
+   let updateTodos = this.state.todos.map((todo)=>{
+        if(todo.id === id){
+          todo.completed = !todo.completed;
+        }
+        //不用else的原因是，預設就顯示todo啦，也就是todos裡面單一的object
+        return todo;
+   });
+   
 
+   this.setState({todos:updateTodos});
+  },
   render: function () {
     let {todos} = this.state;
 
@@ -60,7 +79,7 @@ let TodoApp = React.createClass({
       <div>
         <h1>代辦事項</h1>
         <TodoSearch onSearch={this.handleSearch} />
-        <TodoList todos={todos}/>
+        <TodoList todos={todos} onToggle={this.handleToggle} />
         <AddTodo onAddTodo={this.handleAddTodo}/>
       </div>
     )
