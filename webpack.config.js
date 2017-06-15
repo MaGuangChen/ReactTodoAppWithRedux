@@ -22,9 +22,11 @@ module.exports = {
   },
   resolve: {
     root: __dirname,
+    //讓alias自動去爬資料夾裡面的
     modulesDirectories: [
       'node_modules',
-      './app/components'
+      './app/components',
+      './app/api'
     ],
     alias: {
       applicationStyles: 'app/styles/app.scss'
