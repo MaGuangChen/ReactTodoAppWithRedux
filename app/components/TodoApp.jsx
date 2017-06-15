@@ -30,11 +30,12 @@ let TodoApp = React.createClass({
       searchText: ''
     };
   },
-
+  //經過AddTodo component回傳更新state
   handleAddTodo: function(text){
     alert(`新增代辦 ${text}`);
   },
-  
+
+  //經過TodoSearch component回傳更新state
   handleSearch:function(showCompleted,searchText){
     this.setState({
       showCompleted:showCompleted,
