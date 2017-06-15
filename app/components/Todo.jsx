@@ -12,7 +12,7 @@ let Todo = React.createClass({
     //傳進來的object中的property
     return (
       <div>
-           第{id}項{text}
+           待辦事項id：{id}----{text}
       </div>
     )
   }

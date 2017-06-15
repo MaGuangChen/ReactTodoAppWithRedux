@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid  from 'node-uuid';//一個專門產出獨特id的npm 套件
 
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
@@ -13,16 +14,16 @@ let TodoApp = React.createClass({
     return {
       todos: [
         {
-          id: 1,
+          id: uuid(),//id如果要是獨特獨有的，我們要用node的套件node-uuid
           text: 'Walk the dog'
         }, {
-          id: 2,
+          id: uuid(),
           text: 'Clean the yard'
         }, {
-          id: 3,
+          id: uuid(),
           text: 'Leave mail on porch'
         }, {
-          id: 4,
+          id: uuid(),
           text: 'Play video games'
         }
       ],
@@ -32,7 +33,16 @@ let TodoApp = React.createClass({
   },
   //經過AddTodo component回傳更新state
   handleAddTodo: function(text){
-    alert(`新增代辦 ${text}`);
+
+    this.setState({
+      todos:[
+        ...this.state.todos,//將目前的state引入進來
+        {
+          id:uuid(),//id如果要是獨特獨有的，我們要用node的套件node-uuid
+          text:text//這邊接AddTodo component傳來的user輸入就好
+        }
+      ]
+    });
   },
 
   //經過TodoSearch component回傳更新state
