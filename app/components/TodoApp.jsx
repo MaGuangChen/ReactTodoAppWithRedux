@@ -2,7 +2,7 @@ import React from 'react';
 
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
-
+import TodoSearch from 'TodoSearch';
 /*
 性質：stateful component
 負責工作：將state傳遞給子component，並藉由他們更新之
@@ -25,12 +25,21 @@ let TodoApp = React.createClass({
           id: 4,
           text: 'Play video games'
         }
-      ]
+      ],
+      showCompleted: false,
+      searchText: ''
     };
   },
 
   handleAddTodo: function(text){
-     alert(`新增待辦事項 ${text}`);
+    alert(`新增代辦 ${text}`);
+  },
+  
+  handleSearch:function(showCompleted,searchText){
+    this.setState({
+      showCompleted:showCompleted,
+      searchText:searchText.toLowerCase()
+    })
   },
 
   render: function () {
@@ -39,6 +48,7 @@ let TodoApp = React.createClass({
     return (
       <div>
         <h1>代辦事項</h1>
+        <TodoSearch onSearch={this.handleSearch} />
         <TodoList todos={todos}/>
         <AddTodo onAddTodo={this.handleAddTodo}/>
       </div>

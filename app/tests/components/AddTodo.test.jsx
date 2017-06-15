@@ -15,7 +15,9 @@ describe('AddTodo component',()=>{
     it('測試當user輸入有效值時呼叫onAddTodo prop回傳的動作',()=>{
        let todoText = '檢查郵件囉';
        let spy = expect.createSpy();
+       //先render到螢幕
        let addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
+       //使用el讓我們可以使用jquery然後尋找到dom
        let $el = $(ReactDOM.findDOMNode(addTodo));
 
        addTodo.refs.todoText.value =  todoText;

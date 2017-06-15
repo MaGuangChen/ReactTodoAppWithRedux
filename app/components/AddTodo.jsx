@@ -1,5 +1,11 @@
 import React from 'react';
 
+/*
+性質：stateless component
+負責工作：接受TodoApp component的state，並將user輸入返回至TodoApp component
+接收props：有，onAddTodo
+*/
+
 let AddTodo = React.createClass({
     handleSubmit: function(e){
        e.preventDefault();
