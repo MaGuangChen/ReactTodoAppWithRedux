@@ -1,6 +1,6 @@
 
 import $ from 'jquery';
-//專門負責儲存localStorage
+//專門負責儲存localStorage，上傳以及抓取快取
 module.exports = {
     //傳上去
     setTodos: function(todos){
@@ -12,7 +12,7 @@ module.exports = {
           //並且由於我們要代入的第二個參數值不為字串
           //因此我們使用JSON.stringify() method將他們轉為字串
           localStorage.setItem('todos',JSON.stringify(todos));
-          //跟傳進來的一模一樣，因為我們確認過為陣列了
+          //跟傳進來的一模一樣，因為我們確認過將要上傳的資料型態為陣列了
           return todos;
        }
     },
@@ -24,6 +24,7 @@ module.exports = {
          let todos = [];
 
          //將這裡的local 變數todos變為從localStorage儲存的陣列
+         //try跟catch可以查一下
          try {
             todos = JSON.parse(stringTodos);//JSON.parse() method可以將這樣的字串'[1,2]'轉回[1,2]
          }catch(e){
