@@ -33,8 +33,7 @@ let final =['paul',...names];
 //Hi paul
 final.map(
     (name)=>{
-       console.log(`Hi ${name}`) 
+       console.log(`Hi ${name}`) ;
     }
-)
+);
 
-() => 2*2;
