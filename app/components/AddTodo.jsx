@@ -22,7 +22,7 @@ let AddTodo = React.createClass({
     },
     render: function(){
         return (
-          <div>
+          <div className="container__footer">
              <form onSubmit={this.handleSubmit}>
                 <input type="text" ref="todoText" placeholder="輸入今日待辦事項" />
                 <button className="button expanded">增加至清單</button>

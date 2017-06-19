@@ -31,4 +31,13 @@ describe('TodoList component',()=>{
           expect(todosComponents.length).toBe(todos.length);
           expect(todos.length).toBe(2);
       });
+      it('如果沒有建立待辦事項，應該要render目前沒有待辦事項訊息',()=>{
+          //要測試這個要先render，所以要先做測試的data
+          let todos = [];
+          //render上文件啦
+          let todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+          let $el = $(ReactDOM.findDOMNode(todoList));
+
+          expect($el.find('.container__message').length).toBe(1);
+      });
 });

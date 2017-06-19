@@ -9,6 +9,7 @@ import moment from 'moment';//一個第三方套件，用來整理時間的
 let Todo = React.createClass({
   render: function () {
     let {id, text,completed, createAt,completedAt} = this.props; 
+    let todoClassName = completed ? 'todo todo-completed' : 'todo';
     let renderDate = ()=>{
       let message = '建立時間 ';
       let timestamp = createAt;
@@ -20,12 +21,17 @@ let Todo = React.createClass({
     };
     //傳進來的object中的property
     return (
-      <div onClick={()=>{
+      <div className={todoClassName} onClick={()=>{
          this.props.onToggle(id);
       }}>
-           <input type="checkbox" checked={completed}/>
-           <p>{text}</p>
-           <p>{renderDate()}</p>
+      <div>
+         <input type="checkbox" checked={completed}/>
+      </div>
+      <div>
+         <p>{text}</p>
+         <p className="todo__subtext">{renderDate()}</p>
+      </div>
+          
       </div>
     )
   }
