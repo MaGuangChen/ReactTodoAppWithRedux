@@ -1,7 +1,7 @@
 //第三方lib
 import React from 'react';
 import uuid  from 'node-uuid';//一個專門產出獨特id的npm 套件
-
+import moment from 'moment';
 //components
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
@@ -36,8 +36,10 @@ let TodoApp = React.createClass({
         {
           id:uuid(),//id如果要是獨特獨有的，我們要用node的套件node-uuid
           text:text,//這邊接AddTodo component傳來的user輸入就好
-          completed:false//預設當然為false因為才剛增加應該還沒做吧
-        }
+          completed:false,//預設當然為false因為才剛增加應該還沒做吧
+          createAt: moment().unix(),//將會返回timestamp，我們要轉為format
+          completedAt: undefined//完成時間
+         }
       ]
     });
   },
@@ -56,6 +58,9 @@ let TodoApp = React.createClass({
    let updateTodos = this.state.todos.map((todo)=>{
         if(todo.id === id){
           todo.completed = !todo.completed;
+          //todo.completed為true時返回 moment().unix()，為false返回undefined
+          //再勾選時會切換完成狀態並視情況返回時間
+          todo.completedAt = todo.completed ? moment().unix() : undefined;
         }
         //不用else的原因是，預設就顯示todo啦，也就是todos裡面單一的object
         return todo;
