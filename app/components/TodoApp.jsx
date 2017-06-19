@@ -15,14 +15,16 @@ import TodoAPI from 'TodoAPI';
 let TodoApp = React.createClass({
   getInitialState: function () {
     return {
-      todos: TodoAPI.getTodos(),//從TodoAPI呼叫getTodos()成為state.todos
+      //從TodoAPI呼叫getTodos()得到成為state.todos
+      todos: TodoAPI.getTodos(),
       showCompleted: false,
       searchText: ''
     };
   },
-  //在render function後執行，如果state或props有更新的話ㄧ
+  //在render function後執行，如果state或props有更新的話才會執行
   componentDidUpdate:function(){
     //呼叫TodoAPI component的setTodos()
+    //將目前state傳入TodoAPI為參數
     TodoAPI.setTodos(this.state.todos);
   },
   //經過AddTodo component回傳更新state
@@ -45,7 +47,7 @@ let TodoApp = React.createClass({
     this.setState({
       showCompleted:showCompleted,
       searchText:searchText.toLowerCase()
-    })
+    });
   },
   //切換顯示的待辦事項，已完成或未完成
   //經過Todo component -> TodoList component -> TodoApp component
@@ -63,13 +65,14 @@ let TodoApp = React.createClass({
    this.setState({todos:updateTodos});
   },
   render: function () {
-    let {todos} = this.state;
-
+    let {todos,showCompleted,searchText} = this.state;
+    //這個會透過prop傳至TodoList且在TodoList內map
+    let filteredTodos = TodoAPI.filterTodos(todos,showCompleted,searchText);
     return (
       <div>
-        <h1>代辦事項</h1>
+        <h1>購物車component測試，TodoAPP版本</h1>
         <TodoSearch onSearch={this.handleSearch} />
-        <TodoList todos={todos} onToggle={this.handleToggle} />
+        <TodoList todos={filteredTodos} onToggle={this.handleToggle} />
         <AddTodo onAddTodo={this.handleAddTodo}/>
       </div>
     )

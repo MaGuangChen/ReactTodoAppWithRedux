@@ -68,4 +68,60 @@ describe('TodoAPI component',()=>{
        });
     });
 
+    describe('filterTodo()是否正確執行篩選動作',() => {
+      //將測試資料放在公共域，不然每個it() method都要寫
+      let todos = [
+          {
+            id:1,
+            text: 'Some text here',
+            completed: true
+          },
+          {
+            id:2,
+            text: 'Other text',
+            completed: false
+          },
+          {
+            id:3,
+            text: 'Some text here',
+            completed: true
+          }
+      ];
+      it('返回所有符合showCompleted為true條件的待辦事項，也就是勾起來的待辦事項',() => {
+         //呼叫filteredTodos() method並且帶入showCompleted為true
+         //searchText為空字串
+         let filteredTodos = TodoAPI.filterTodos(todos,true,'');
+         //全部都會符合，剛好有符合completed為false或showCompleted為true
+         expect(filteredTodos.length).toBe(3);
+      });
+       it('返回所有符合showCompleted為false條件的待辦事項，也就是未完成的待辦事項',() => {
+         //呼叫filteredTodos() method並且帶入showCompleted為false
+         //searchText為空字串
+         let filteredTodos = TodoAPI.filterTodos(todos,false,'');
+         //因為只有id：2的object會被返回，只有他符合completed為false或showCompleted為true
+         expect(filteredTodos.length).toBe(1);
+      });
+      it('排序待辦事項陣列，將未完成的往上排將完成的往下排',()=>{
+         //傳參數進filterTodos method，並帶入checkbox為勾選狀態
+         let filteredTodos = TodoAPI.filterTodos(todos,true,'');
+         //檢查陣列中是否已經將未完成的項目排至第一個陣列位置
+         expect(filteredTodos[0].completed).toBe(false);
+      });
+       it('將顯示的待辦事項與search bar所輸入的字串相符合',()=>{
+         //傳參數進filterTodos method，並且使用字串'some'
+         //然後我們故意全使用小寫測試我們在可以通用
+         let filteredTodos = TodoAPI.filterTodos(todos,true,'some');
+         //因為字串有some的陣列元素只有兩個，因此toBe(2)
+         expect(filteredTodos.length).toBe(2);
+      });
+      it('如果search bar沒有輸入任何字串，則顯示所有待辦事項',()=>{
+         //傳參數進filterTodos method，如果我們的字串為空值
+         //我們應該返回陣列全部元素
+         let filteredTodos = TodoAPI.filterTodos(todos,true,'');
+         //整個陣列長度為3因此，toBe(3)
+         expect(filteredTodos.length).toBe(3);
+      });
+      
+    });
+
 })

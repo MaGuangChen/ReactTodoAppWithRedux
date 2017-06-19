@@ -36,3 +36,5 @@ final.map(
        console.log(`Hi ${name}`) 
     }
 )
+
+() => 2*2;
