@@ -1,4 +1,3 @@
-
 import $ from 'jquery';
 //專門負責儲存localStorage，上傳以及抓取快取
 //讓user每次重整網頁時能夠有快取，才不會每次重整網頁待辦事項都自動消失
@@ -36,7 +35,7 @@ module.exports = {
          }catch(e){
            
          }
-         return $.isArray(todos) ?todos: [];//$.isArray(todos)不是todos或空陣列
+         return $.isArray(todos) ?todos: [];//$.isArray(todos)是否為array不是todos就是空陣列
 
      },
      //用filter處理快取array，並且返回一個符合條件的array傳回TodoAPP component
