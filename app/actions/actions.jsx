@@ -6,9 +6,9 @@ export const setSearchText = (searchText) => {
     };
 }
 
-export const toggleShowCompleted = () => {
+export const showCompleted = () => {
     return {
-        type:'TOGGLE_SHOW_COMPLETED'
+        type:'SHOW_COMPLETED'
     }
 }
 
