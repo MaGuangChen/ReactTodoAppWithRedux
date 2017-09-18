@@ -6,7 +6,7 @@ import React from 'react';
 接收props：有，onAddTodo
 */
 
-let AddTodo = React.createClass({
+const AddTodo = React.createClass({
 
     handleSubmit: function(e){
        e.preventDefault();
